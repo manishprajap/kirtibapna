@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Photo from "@/components/Photo";
+import HeroCarousel from "@/components/HeroCarousel";
+import { banners } from "@/lib/banners.generated";
 import AvailableOn from "@/components/AvailableOn";
 import NewsletterForm from "@/components/NewsletterForm";
 import ProductCard from "@/components/ProductCard";
@@ -25,52 +27,8 @@ export default function Home() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blush-50 via-white to-blush">
-        <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent-light/50 blur-3xl" />
-        <div className="absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-blush blur-3xl" />
-
-        <div className="container-x relative grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
-          <div className="animate-fadeUp">
-            <p className="eyebrow">The new collection</p>
-            <h1 className="mt-5 text-5xl font-semibold leading-[1.05] text-ink sm:text-6xl lg:text-7xl">
-              Vintage elegance,
-              <br />
-              <span className="italic text-brand">with a modern twist</span>
-            </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-ink/70">
-              Suits, lehengas, sarees, co-ord sets and dresses for women — designed by Kriti Bapna, a NIFT-trained designer from Kota, with vintage elegance and a modern twist.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link href="/shop" className="btn-primary">Shop the collection</Link>
-              <Link href="/about" className="btn-outline">Meet Kriti</Link>
-            </div>
-            <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink/65">
-              {["Free shipping above ₹1,999", "7-day easy returns", "Cash on delivery"].map((t) => (
-                <li key={t} className="flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] text-white">✓</span>
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Showcase */}
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-t-[14rem] rounded-b-[2rem] bg-blush shadow-2xl shadow-brand/15 ring-8 ring-white">
-              <Photo src={photos.hero} alt="Emerald green embroidered kurta set" category="Suits" colors={["#3FBF9F", "#145C46"]} priority className="absolute inset-0 h-full w-full" />
-            </div>
-            <div className="absolute -left-4 bottom-10 w-28 animate-floaty overflow-hidden rounded-2xl bg-white p-1.5 shadow-xl shadow-brand/20 sm:-left-12 sm:w-36">
-              <Photo src={photos.heroLehenga} alt="Georgette brasso kaftan" category="Suits" colors={["#CDBB94", "#6B5B4B"]} className="aspect-[3/4] w-full rounded-xl" />
-              <p className="py-1.5 text-center text-[10px] font-medium uppercase tracking-widest text-brand">Kaftans</p>
-            </div>
-            <div className="absolute -right-3 top-16 w-24 animate-floaty overflow-hidden rounded-2xl bg-white p-1.5 shadow-xl shadow-brand/20 [animation-delay:1.5s] sm:-right-10 sm:w-32">
-              <Photo src={photos.heroKurti} alt="Green flared kurta set" category="Suits" colors={["#1F5A4B", "#0F2E27"]} className="aspect-[3/4] w-full rounded-xl" />
-              <p className="py-1.5 text-center text-[10px] font-medium uppercase tracking-widest text-brand">Kurta sets</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* HERO – banner carousel (images: public/banners/banner-1.jpg, banner-2.jpg …) */}
+      <HeroCarousel slides={banners} showText />
 
       {/* MARQUEE */}
       <div className="overflow-hidden bg-brand py-3.5">

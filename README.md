@@ -39,4 +39,3 @@ Deploy free on **Vercel**, or any Node host.
 2. Replace the About page text with your own story, and add real customer reviews when you have them.
 3. Connect a database instead of `products.ts`.
 4. Integrate **Razorpay** (UPI/cards) in `/api/orders` – checkout is a demo until you do.
-# kirtibapna
