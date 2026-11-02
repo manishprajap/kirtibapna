@@ -46,7 +46,7 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="group relative">
+    <div className="group relative rounded-2xl border border-blush bg-white p-2.5 transition-colors duration-300 hover:border-brand/60">
       <Link href={href} className="block">
         <div className="relative overflow-hidden rounded-2xl">
           <ProductImage
@@ -65,12 +65,14 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="mt-4 space-y-1.5 px-1">
           <p className="text-[11px] uppercase tracking-widest text-ink/50">{product.category}</p>
           <h3 className="font-display text-lg leading-snug text-ink">{product.name}</h3>
-          <div className="flex items-baseline gap-2">
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
             <span className="font-semibold text-brand">{formatPrice(product.price)}</span>
             {off > 0 && (
               <>
                 <span className="text-sm text-ink/40 line-through">{formatPrice(product.mrp)}</span>
-                <span className="text-xs font-medium text-emerald-700">{off}% off</span>
+                <span className="text-xs font-medium text-emerald-700">
+                  You save {formatPrice(product.mrp - product.price)} ({off}%)
+                </span>
               </>
             )}
           </div>
@@ -88,7 +90,7 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
 
       {/* Hover actions: add to cart + wishlist (always visible on touch screens) */}
-      <div className="absolute inset-x-0 top-0 flex aspect-[3/4] items-end justify-center pb-0 pointer-events-none">
+      <div className="pointer-events-none absolute inset-x-2.5 top-2.5 flex aspect-[3/4] items-end justify-center pb-0">
         <div className="pointer-events-auto flex translate-y-2 items-center bg-white opacity-100 shadow-sm transition duration-300 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100">
           <button
             onClick={onCart}

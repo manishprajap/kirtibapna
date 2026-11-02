@@ -47,6 +47,121 @@
   background-size: 14px 14px;
 }
 
+.site-canvas {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background-color: #fffdfd;
+}
+
+.site-canvas::before,
+.site-canvas::after {
+  position: absolute;
+  z-index: -1;
+  inset: -24px 0;
+  width: auto;
+  content: "";
+  opacity: 0.06;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 4px 7px at 50% 12%, rgba(216, 27, 96, 0.62) 95%, transparent 100%),
+    radial-gradient(ellipse 4px 7px at 50% 28%, rgba(216, 27, 96, 0.62) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 4px at 37% 20%, rgba(216, 27, 96, 0.55) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 4px at 63% 20%, rgba(216, 27, 96, 0.55) 95%, transparent 100%),
+    radial-gradient(circle at 50% 20%, rgba(184, 132, 62, 0.8) 0 2px, transparent 2.5px),
+    linear-gradient(110deg, transparent 49.5%, rgba(93, 125, 91, 0.18) 50%, transparent 50.5%),
+    radial-gradient(ellipse 7px 3px at 32% 38%, rgba(93, 125, 91, 0.55) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 3px at 68% 50%, rgba(93, 125, 91, 0.55) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 3px at 32% 65%, rgba(93, 125, 91, 0.55) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 3px at 68% 77%, rgba(93, 125, 91, 0.55) 95%, transparent 100%);
+  background-size: 220px 280px;
+  background-repeat: repeat;
+  mask-image: linear-gradient(to bottom, transparent, #000 2%, #000 98%, transparent);
+  animation: botanical-sway 14s ease-in-out infinite alternate;
+  will-change: translate, opacity;
+}
+
+.site-canvas::before {
+  left: 0;
+}
+
+.site-canvas::after {
+  inset: -24px 0 -24px auto;
+  width: clamp(2.5rem, 6vw, 5.5rem);
+  transform: scaleX(-1);
+  animation-delay: -9s;
+  opacity: 0.12;
+  background-size: 76px 112px;
+  background-repeat: repeat-y;
+}
+
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.site-footer::before,
+.site-footer::after {
+  position: absolute;
+  z-index: 0;
+  inset-block: -24px;
+  width: clamp(2.5rem, 6vw, 5.5rem);
+  content: "";
+  opacity: 0.14;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 4px 7px at 50% 12%, rgba(255, 194, 217, 0.8) 95%, transparent 100%),
+    radial-gradient(ellipse 4px 7px at 50% 28%, rgba(255, 194, 217, 0.8) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 4px at 37% 20%, rgba(255, 194, 217, 0.7) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 4px at 63% 20%, rgba(255, 194, 217, 0.7) 95%, transparent 100%),
+    radial-gradient(circle at 50% 20%, rgba(255, 194, 217, 0.9) 0 2px, transparent 2.5px),
+    linear-gradient(110deg, transparent 49.5%, rgba(255, 255, 255, 0.5) 50%, transparent 50.5%),
+    radial-gradient(ellipse 7px 3px at 32% 38%, rgba(255, 255, 255, 0.48) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 3px at 68% 50%, rgba(255, 255, 255, 0.48) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 3px at 32% 65%, rgba(255, 255, 255, 0.48) 95%, transparent 100%),
+    radial-gradient(ellipse 7px 3px at 68% 77%, rgba(255, 255, 255, 0.48) 95%, transparent 100%);
+  background-size: 76px 112px;
+  background-repeat: repeat-y;
+  animation: botanical-sway 14s ease-in-out infinite alternate;
+  will-change: translate, opacity;
+}
+
+.site-footer::after {
+  right: 0;
+  transform: scaleX(-1);
+  animation-delay: -9s;
+}
+
+.site-footer::before {
+  left: 0;
+}
+
+.site-footer > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes botanical-sway {
+  from {
+    translate: 0 -20px;
+    opacity: 0.08;
+  }
+  to {
+    translate: 0 20px;
+    opacity: 0.16;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-canvas::before,
+  .site-canvas::after,
+  .site-footer::before,
+  .site-footer::after {
+    animation: none;
+  }
+}
+
 /* Dual-handle price slider */
 .dual-range { position: relative; height: 20px; }
 .dual-range input[type="range"] {

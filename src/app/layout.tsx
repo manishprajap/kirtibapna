@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
 import { WishlistProvider } from "@/components/WishlistProvider";
@@ -11,7 +11,7 @@ const display = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
   variable: "--font-display",
 });
-const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const sans = Manrope({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: {
@@ -28,9 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <CartProvider>
           <WishlistProvider>
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            <div className="site-canvas">
+              <Header />
+              <main>{children}</main>
+              <Footer />
+            </div>
           </WishlistProvider>
         </CartProvider>
       </body>

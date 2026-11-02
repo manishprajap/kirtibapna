@@ -77,7 +77,7 @@ const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 
 export const inCategory = (p: Product, c: string) => p.category === c || !!p.alsoIn?.includes(c as Category);
 
-export const products: Product[] = [
+const catalog: Product[] = [
   {
     slug: "beige-brown-georgette-brasso-kaftan",
     image: "/products/beige-brown-georgette-brasso-kaftan.jpg",
@@ -640,6 +640,12 @@ export const products: Product[] = [
     care: "Dry clean only.",
   },
 ];
+
+export const SITEWIDE_DISCOUNT_PERCENT = 10;
+export const products: Product[] = catalog.map((product) => ({
+  ...product,
+  price: Math.round(product.mrp * (1 - SITEWIDE_DISCOUNT_PERCENT / 100)),
+}));
 
 // Extra photos found in /public/products named <slug>-2.jpg, <slug>-3.jpg … (see scripts/gen-gallery.mjs)
 products.forEach((p) => {

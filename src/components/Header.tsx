@@ -51,9 +51,9 @@ export default function Header() {
         </p>
       </div>
 
-      <div className="container-x flex h-20 items-center justify-between gap-4">
+      <div className="container-x flex h-20 items-center justify-between gap-1 sm:gap-4">
         <button
-          className="rounded-full p-2 hover:bg-blush lg:hidden"
+          className="rounded-full p-1.5 hover:bg-blush sm:p-2 lg:hidden"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -75,11 +75,11 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-1">
-          <button className="rounded-full p-2.5 hover:bg-blush" onClick={() => setSearchOpen(!searchOpen)} aria-label="Search">
+        <div className="flex items-center gap-0 sm:gap-1">
+          <button className="rounded-full p-1.5 hover:bg-blush sm:p-2.5" onClick={() => setSearchOpen(!searchOpen)} aria-label="Search">
             <Icon d="M21 21l-4.3-4.3M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z" />
           </button>
-          <Link href="/wishlist" className="relative rounded-full p-2.5 hover:bg-blush" aria-label={`Wishlist, ${wished.length} items`}>
+          <Link href="/wishlist" className="relative rounded-full p-1.5 hover:bg-blush sm:p-2.5" aria-label={`Wishlist, ${wished.length} items`}>
             <Icon d="M12 20s-7-4.4-9-9.2C1.8 7.6 3.9 4.5 7 4.5c2 0 3.4 1.1 5 3 1.6-1.9 3-3 5-3 3.1 0 5.2 3.1 4 6.3-2 4.800-9 9.200-9 9.200Z" />
             {wished.length > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-[10px] font-semibold text-white">
@@ -87,7 +87,7 @@ export default function Header() {
               </span>
             )}
           </Link>
-          <Link href="/cart" className="relative rounded-full p-2.5 hover:bg-blush" aria-label={`Cart, ${count} items`}>
+          <Link href="/cart" className="relative rounded-full p-1.5 hover:bg-blush sm:p-2.5" aria-label={`Cart, ${count} items`}>
             <Icon d="M6 7h12l-1 12H7L6 7Zm3 0a3 3 0 0 1 6 0" />
             {count > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-[10px] font-semibold text-white">

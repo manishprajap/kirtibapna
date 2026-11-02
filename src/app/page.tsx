@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Photo from "@/components/Photo";
 import HeroCarousel from "@/components/HeroCarousel";
-import { banners } from "@/lib/banners.generated";
 import AvailableOn from "@/components/AvailableOn";
 import NewsletterForm from "@/components/NewsletterForm";
 import ProductCard from "@/components/ProductCard";
-import { categories, categoryCover, categoryPalette, getProduct, photos, products } from "@/lib/products";
+import { categories, categoryCover, categoryPalette, discountPercent, getProduct, photos, products, SITEWIDE_DISCOUNT_PERCENT } from "@/lib/products";
+import { banners } from "@/lib/banners.generated";
 
 const promises = [
   { title: "Designed by Kriti", text: "Every piece is designed with vintage elegance and a modern twist." },
@@ -16,6 +16,10 @@ const promises = [
 
 export default function Home() {
   const featured = products.filter((p) => p.featured).slice(0, 4);
+  const discounted = [...products]
+    .filter((p) => discountPercent(p) > 0)
+    .sort((a, b) => discountPercent(b) - discountPercent(a))
+    .slice(0, 4);
   const arrivals = [
     "mirror-blouse-and-layered-skirt-lehenga-set",
     "pink-viscose-organza-mirror-embroidered-saree-set",
@@ -28,7 +32,7 @@ export default function Home() {
   return (
     <>
       {/* HERO – banner carousel (images: public/banners/banner-1.jpg, banner-2.jpg …) */}
-      <HeroCarousel slides={banners} showText />
+      <HeroCarousel slides={["/banners/hero-banner.jpg", ...banners]} showText />
 
       {/* MARQUEE */}
       <div className="overflow-hidden bg-brand py-3.5">
@@ -90,6 +94,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* DISCOUNT EDIT */}
+      {discounted.length > 0 && (
+        <section className="container-x pt-24">
+          <div className="rounded-3xl bg-blush/70 px-5 py-10 sm:px-10 sm:py-12">
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
+              <div>
+                <p className="eyebrow">The offer edit</p>
+                <h2 className="mt-3 text-4xl font-semibold sm:text-5xl">Flat {SITEWIDE_DISCOUNT_PERCENT}% off every style</h2>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink/65">
+                  No coupon code needed. Your reduced price is already shown on each product.
+                </p>
+              </div>
+              <Link href="/shop" className="text-sm font-medium text-brand underline-offset-4 hover:underline">
+                Shop all styles →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4">
+              {discounted.map((p) => (
+                <ProductCard key={p.slug} product={p} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* BANNER */}
       <section className="container-x pt-24">
         <div className="relative grid items-center overflow-hidden rounded-3xl bg-gradient-to-r from-brand to-brand-dark text-white md:grid-cols-[1.2fr_1fr]">
@@ -109,12 +138,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NEW & SALE */}
+      {/* NEW ARRIVALS */}
       <section className="container-x pt-24">
         <div className="mb-10 flex items-end justify-between">
           <div>
             <p className="eyebrow">Just in</p>
-            <h2 className="mt-3 text-4xl font-semibold sm:text-5xl">New arrivals &amp; offers</h2>
+            <h2 className="mt-3 text-4xl font-semibold sm:text-5xl">New arrivals</h2>
           </div>
           <Link href="/shop" className="hidden text-sm text-brand underline-offset-4 hover:underline sm:block">
             View all →

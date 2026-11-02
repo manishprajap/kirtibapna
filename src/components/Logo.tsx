@@ -61,16 +61,16 @@ export default function Logo({
   const sub = variant === "dark" ? "text-ink/50" : "text-white/65";
   return (
     <Link href="/" aria-label="Kriti Bapna – Home" className={`inline-flex flex-col items-center ${className}`}>
-      <span className="flex items-center gap-3 sm:gap-4">
-        <span className={`font-display text-xl font-semibold uppercase tracking-[0.38em] sm:text-2xl ${word}`}>Kriti</span>
+      <span className="flex items-center gap-2 sm:gap-4">
+        <span className={`font-display text-lg font-semibold uppercase tracking-[0.2em] sm:text-2xl sm:tracking-[0.38em] ${word}`}>Kriti</span>
         {variant === "dark" ? (
           <Sprig height={38} id={`sprig-${variant}`} className="shrink-0" />
         ) : (
           <LogoMark size={38} />
         )}
-        <span className={`font-display text-xl font-semibold uppercase tracking-[0.38em] sm:text-2xl ${word}`}>Bapna</span>
+        <span className={`font-display text-lg font-semibold uppercase tracking-[0.2em] sm:text-2xl sm:tracking-[0.38em] ${word}`}>Bapna</span>
       </span>
-      <span className={`mt-1 text-[8px] font-medium uppercase tracking-[0.5em] ${sub}`}>Designer Womenswear</span>
+      <span className={`mt-1 text-[7px] font-medium uppercase tracking-[0.32em] sm:text-[8px] sm:tracking-[0.5em] ${sub}`}>Designer Womenswear</span>
     </Link>
   );
 }
