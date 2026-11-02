@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-ink antialiased;
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), Georgia, serif;
+  }
+  ::selection {
+    @apply bg-brand text-white;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-medium tracking-wide text-white transition hover:bg-brand-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-brand px-7 py-3.5 text-sm font-medium tracking-wide text-brand transition hover:bg-brand hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+  }
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-luxe text-accent;
+  }
+  .input {
+    @apply w-full rounded-xl border border-blush bg-white px-4 py-3 text-sm outline-none transition placeholder:text-ink/40 focus:border-brand focus:ring-2 focus:ring-brand/15;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-medium uppercase tracking-wider text-ink/60;
+  }
+}
+
+.pattern-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* Dual-handle price slider */
+.dual-range { position: relative; height: 20px; }
+.dual-range input[type="range"] {
+  position: absolute; inset: 0; width: 100%; height: 20px; margin: 0;
+  background: none; pointer-events: none; appearance: none; -webkit-appearance: none;
+}
+.dual-range input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; pointer-events: auto; height: 18px; width: 18px; border-radius: 9999px;
+  background: #D81B60; border: 3px solid #fff; box-shadow: 0 0 0 1px #D81B60; cursor: grab;
+}
+.dual-range input[type="range"]::-moz-range-thumb {
+  pointer-events: auto; height: 14px; width: 14px; border-radius: 9999px;
+  background: #D81B60; border: 3px solid #fff; box-shadow: 0 0 0 1px #D81B60; cursor: grab;
+}
+.dual-range input[type="range"]::-webkit-slider-runnable-track { background: transparent; }
+.dual-range input[type="range"]::-moz-range-track { background: transparent; }
