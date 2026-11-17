@@ -16,7 +16,7 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-blush-50 via-white to-blush">
+      <section className="relative overflow-hidden bg-gradient-to-br from-surface via-night to-surface">
         <div className="container-x grid items-center gap-10 py-16 lg:grid-cols-2 lg:py-24">
           <div>
             <p className="eyebrow">Meet the designer</p>
@@ -30,7 +30,7 @@ export default function AboutPage() {
             <Link href="/shop" className="btn-primary mt-8">Explore my collection</Link>
           </div>
           <div className="mx-auto w-full max-w-xs">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-t-[10rem] rounded-b-3xl bg-blush ring-8 ring-white shadow-xl shadow-brand/15">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-t-[10rem] rounded-b-3xl bg-blush ring-8 ring-surface shadow-xl shadow-brand/10">
               <OwnerPhoto className="absolute inset-0 h-full w-full" />
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function AboutPage() {
         </div>
         <div className="grid gap-5">
           {values.map((v) => (
-            <div key={v.t} className="rounded-3xl border border-blush bg-white p-7">
+            <div key={v.t} className="rounded-3xl border border-blush bg-surface p-7">
               <h3 className="text-2xl font-semibold text-brand">{v.t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink/65">{v.d}</p>
             </div>

@@ -2,12 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ───────────────────────── Colour tokens ─────────────────────────
+   Storefront = dark theme. The admin area (.admin-canvas) restores the light palette. */
+:root {
+  --c-night: 10 10 10;
+  --c-surface: 20 20 20;
+  --c-ink: 244 239 234;
+  --c-blush: 38 34 38;
+  --c-blush-50: 28 24 28;
+  --c-brand: 232 64 122;
+  --c-brand-dark: 194 24 91;
+  --c-brand-light: 255 125 166;
+  --c-accent: 255 143 181;
+  --c-accent-light: 255 194 217;
+  --hh: 76px;
+}
+
+.admin-canvas {
+  --c-night: 255 255 255;
+  --c-surface: 255 255 255;
+  --c-ink: 42 26 33;
+  --c-blush: 253 232 239;
+  --c-blush-50: 255 246 249;
+  --c-brand: 216 27 96;
+  --c-brand-dark: 173 20 87;
+  --c-brand-light: 236 64 122;
+  --c-accent: 214 51 132;
+  --c-accent-light: 255 194 217;
+  color-scheme: light;
+  min-height: 100vh;
+  background: #fffdfd;
+  color: rgb(var(--c-ink));
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
+    scroll-padding-top: 90px;
   }
   body {
-    @apply bg-white text-ink antialiased;
+    @apply bg-night text-ink antialiased;
     font-family: var(--font-sans), system-ui, sans-serif;
   }
   h1,
@@ -23,158 +58,312 @@
 
 @layer components {
   .container-x {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-medium tracking-wide text-white transition hover:bg-brand-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-medium tracking-wide text-white transition hover:bg-brand-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-night disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-brand px-7 py-3.5 text-sm font-medium tracking-wide text-brand transition hover:bg-brand hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-medium tracking-wide text-white transition hover:border-white hover:bg-white hover:text-night focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-night;
   }
   .eyebrow {
     @apply text-xs font-medium uppercase tracking-luxe text-accent;
   }
   .input {
-    @apply w-full rounded-xl border border-blush bg-white px-4 py-3 text-sm outline-none transition placeholder:text-ink/40 focus:border-brand focus:ring-2 focus:ring-brand/15;
+    @apply w-full rounded-xl border border-blush bg-surface px-4 py-3 text-sm text-ink outline-none transition placeholder:text-ink/40 focus:border-brand focus:ring-2 focus:ring-brand/20;
   }
   .label {
     @apply mb-1.5 block text-xs font-medium uppercase tracking-wider text-ink/60;
   }
 }
 
-.pattern-dots {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
-  background-size: 14px 14px;
+/* The admin area keeps its own light look */
+.admin-canvas .btn-primary {
+  @apply hover:bg-brand-dark;
+}
+.admin-canvas .btn-outline {
+  @apply border-brand text-brand hover:bg-brand hover:text-white;
+}
+.admin-canvas .input {
+  @apply bg-white;
 }
 
-.site-canvas {
-  position: relative;
-  isolation: isolate;
-  min-height: 100vh;
-  background-color: #fffdfd;
+/* ───────────────────────── Motion helpers ───────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
 }
 
-.site-canvas::before,
-.site-canvas::after {
-  position: absolute;
-  z-index: -1;
-  inset: -24px 0;
-  width: auto;
-  content: "";
-  opacity: 0.06;
-  pointer-events: none;
-  background-image:
-    radial-gradient(ellipse 4px 7px at 50% 12%, rgba(216, 27, 96, 0.62) 95%, transparent 100%),
-    radial-gradient(ellipse 4px 7px at 50% 28%, rgba(216, 27, 96, 0.62) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 4px at 37% 20%, rgba(216, 27, 96, 0.55) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 4px at 63% 20%, rgba(216, 27, 96, 0.55) 95%, transparent 100%),
-    radial-gradient(circle at 50% 20%, rgba(184, 132, 62, 0.8) 0 2px, transparent 2.5px),
-    linear-gradient(110deg, transparent 49.5%, rgba(93, 125, 91, 0.18) 50%, transparent 50.5%),
-    radial-gradient(ellipse 7px 3px at 32% 38%, rgba(93, 125, 91, 0.55) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 3px at 68% 50%, rgba(93, 125, 91, 0.55) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 3px at 32% 65%, rgba(93, 125, 91, 0.55) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 3px at 68% 77%, rgba(93, 125, 91, 0.55) 95%, transparent 100%);
-  background-size: 220px 280px;
-  background-repeat: repeat;
-  mask-image: linear-gradient(to bottom, transparent, #000 2%, #000 98%, transparent);
-  animation: botanical-sway 7s ease-in-out infinite alternate;
-  will-change: translate, opacity;
-}
-
-.site-canvas::before {
-  left: 0;
-}
-
-.site-canvas::after {
-  inset: -24px 0 -24px auto;
-  width: clamp(2.5rem, 6vw, 5.5rem);
-  transform: scaleX(-1);
-  animation-delay: -9s;
-  opacity: 0.12;
-  background-size: 76px 112px;
-  background-repeat: repeat-y;
-}
-
-.site-footer {
-  position: relative;
-  isolation: isolate;
+.mask {
+  display: block;
   overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.mask > span {
+  display: block;
+  transform: translateY(115%);
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 0.12s + var(--d, 0ms));
+}
+.mask.is-in > span,
+html[data-intro="done"] .mask-hero > span {
+  transform: none;
 }
 
-.site-footer::before,
-.site-footer::after {
-  position: absolute;
-  z-index: 0;
-  inset-block: -24px;
-  width: clamp(2.5rem, 6vw, 5.5rem);
-  content: "";
-  opacity: 0.14;
-  pointer-events: none;
-  background-image:
-    radial-gradient(ellipse 4px 7px at 50% 12%, rgba(255, 194, 217, 0.8) 95%, transparent 100%),
-    radial-gradient(ellipse 4px 7px at 50% 28%, rgba(255, 194, 217, 0.8) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 4px at 37% 20%, rgba(255, 194, 217, 0.7) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 4px at 63% 20%, rgba(255, 194, 217, 0.7) 95%, transparent 100%),
-    radial-gradient(circle at 50% 20%, rgba(255, 194, 217, 0.9) 0 2px, transparent 2.5px),
-    linear-gradient(110deg, transparent 49.5%, rgba(255, 255, 255, 0.5) 50%, transparent 50.5%),
-    radial-gradient(ellipse 7px 3px at 32% 38%, rgba(255, 255, 255, 0.48) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 3px at 68% 50%, rgba(255, 255, 255, 0.48) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 3px at 32% 65%, rgba(255, 255, 255, 0.48) 95%, transparent 100%),
-    radial-gradient(ellipse 7px 3px at 68% 77%, rgba(255, 255, 255, 0.48) 95%, transparent 100%);
-  background-size: 76px 112px;
-  background-repeat: repeat-y;
-  animation: botanical-sway 7s ease-in-out infinite alternate;
-  will-change: translate, opacity;
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
+  color: transparent;
+}
+.text-outline-shine {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  color: transparent;
+  background: linear-gradient(100deg, transparent 35%, rgba(255, 125, 166, 0.55) 50%, transparent 65%) 0 0 / 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: sweep 6s linear infinite;
+}
+@keyframes sweep {
+  to {
+    background-position: -200% 0;
+  }
 }
 
-.site-footer::after {
-  right: 0;
-  transform: scaleX(-1);
-  animation-delay: -9s;
-}
-
-.site-footer::before {
-  left: 0;
-}
-
-.site-footer > * {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes botanical-sway {
-  from {
-    translate: 0 -30px;
-    opacity: 0.14;
+@keyframes kenburns {
+  0% {
+    transform: scale(1.14);
   }
   to {
-    translate: 0 30px;
-    opacity: 0.32;
+    transform: scale(1);
   }
+}
+.kenburns {
+  animation: kenburns 9s ease-out both;
+}
+
+@keyframes progress {
+  0% {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes scrollline {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  51% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  to {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.link-u {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-u:hover {
+  background-size: 100% 1px;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200%;
+  }
+}
+.shimmer {
+  background: linear-gradient(100deg, #ff7da6 20%, #fff 40%, #ffc2d9 50%, #ff7da6 70%) 0 0 / 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4.5s linear infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  to {
+    opacity: 0.15;
+    transform: scale(0.6) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25) rotate(90deg);
+  }
+}
+.animate-twinkle {
+  animation: twinkle 3.6s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+@keyframes strip {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes strip-rev {
+  0% {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.strip-wrap:hover > div {
+  animation-play-state: paused !important;
+}
+
+.curtain {
+  clip-path: inset(100% 0 0 0 round 2rem);
+  transition: clip-path 1.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.curtain > * {
+  transform: scale(1.12);
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.curtain.is-in {
+  clip-path: inset(0 0 0 0 round 2rem);
+}
+.curtain.is-in > * {
+  transform: none;
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 1px;
+  background: #e8407a;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link.active,
+.nav-link:hover {
+  color: #c2185b;
+}
+.nav-link.active::after,
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-dot.on .hero-bar {
+  animation: progress 5.5s linear both;
+}
+#hero.paused .hero-dot.on .hero-bar {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-canvas::before,
-  .site-canvas::after,
-  .site-footer::before,
-  .site-footer::after {
+  .curtain,
+  .curtain > * {
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+  .animate-spin-slow,
+  .animate-twinkle,
+  .shimmer,
+  .strip-wrap > div,
+  .text-outline-shine {
+    animation: none !important;
+  }
+  .shimmer {
+    -webkit-text-fill-color: #ff7da6;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+  }
+  .mask > span,
+  .reveal {
+    transform: none;
+    transition: none;
+  }
+  .animate-floaty,
+  .animate-marquee,
+  .kenburns {
     animation: none;
   }
 }
 
-/* Dual-handle price slider */
-.dual-range { position: relative; height: 20px; }
+/* Dual-handle price slider (shop filters) */
+.dual-range {
+  position: relative;
+  height: 20px;
+}
 .dual-range input[type="range"] {
-  position: absolute; inset: 0; width: 100%; height: 20px; margin: 0;
-  background: none; pointer-events: none; appearance: none; -webkit-appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  background: none;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
 }
 .dual-range input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; pointer-events: auto; height: 18px; width: 18px; border-radius: 9999px;
-  background: #D81B60; border: 3px solid #fff; box-shadow: 0 0 0 1px #D81B60; cursor: grab;
+  -webkit-appearance: none;
+  pointer-events: auto;
+  height: 18px;
+  width: 18px;
+  border-radius: 9999px;
+  background: #e8407a;
+  border: 3px solid #141414;
+  box-shadow: 0 0 0 1px #e8407a;
+  cursor: grab;
 }
 .dual-range input[type="range"]::-moz-range-thumb {
-  pointer-events: auto; height: 14px; width: 14px; border-radius: 9999px;
-  background: #D81B60; border: 3px solid #fff; box-shadow: 0 0 0 1px #D81B60; cursor: grab;
+  pointer-events: auto;
+  height: 14px;
+  width: 14px;
+  border-radius: 9999px;
+  background: #e8407a;
+  border: 3px solid #141414;
+  box-shadow: 0 0 0 1px #e8407a;
+  cursor: grab;
 }
-.dual-range input[type="range"]::-webkit-slider-runnable-track { background: transparent; }
-.dual-range input[type="range"]::-moz-range-track { background: transparent; }
+.dual-range input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent;
+}
+.dual-range input[type="range"]::-moz-range-track {
+  background: transparent;
+}

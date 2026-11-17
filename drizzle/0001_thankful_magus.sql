@@ -1,0 +1,1 @@
+ALTER TABLE `products` ADD `also_in` json NOT NULL;

@@ -1,38 +1,37 @@
-import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
 import { WishlistProvider } from "@/components/WishlistProvider";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import SiteChrome from "@/components/SiteChrome";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-display",
 });
-const sans = Manrope({ subsets: ["latin"], variable: "--font-sans" });
+const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: {
-    default: "Kriti Bapna | Suits, Lehengas, Sarees, Co-ord Sets & Dresses",
-    template: "%s | Kriti Bapna",
+    default: "Kirti Bapna – Ladies Fashion | Sarees, Kurta Sets, Co-ords, Dresses",
+    template: "%s | Kirti Bapna",
   },
   description:
-    "Designer womenswear by Kriti Bapna — suits, lehengas, sarees, co-ord sets, formal sets and dresses.",
+    "Shop sarees, kurta sets, co-ord sets, dresses and kaftans for women from Kirti Bapna. Vintage elegance with a modern twist.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body>
+      <body id="top">
         <CartProvider>
           <WishlistProvider>
-            <div className="site-canvas">
-              <Header />
-              <main>{children}</main>
-              <Footer />
-            </div>
+            <SiteChrome>{children}</SiteChrome>
           </WishlistProvider>
         </CartProvider>
       </body>

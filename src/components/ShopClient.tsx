@@ -64,7 +64,7 @@ function matches(p: Product, f: Filters, skip?: Facet) {
 function Section({ title, children, defaultOpen = true }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
   return (
     <details open={defaultOpen} className="group border-b border-blush py-5">
-      <summary className="flex cursor-pointer list-none items-center justify-between text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-dark [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center justify-between text-[11px] font-semibold uppercase tracking-[0.22em] text-accent [&::-webkit-details-marker]:hidden">
         {title}
         <svg viewBox="0 0 24 24" className="h-4 w-4 transition group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
           <path d="M6 9l6 6 6-6" />
@@ -77,7 +77,7 @@ function Section({ title, children, defaultOpen = true }: { title: string; child
 
 function Check({ checked }: { checked: boolean }) {
   return (
-    <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border transition ${checked ? "border-brand bg-brand" : "border-brand/30 bg-white"}`}>
+    <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border transition ${checked ? "border-brand bg-brand" : "border-brand/30 bg-surface"}`}>
       {checked && (
         <svg viewBox="0 0 24 24" className="h-3 w-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden="true">
           <path d="M5 12l5 5L20 7" />
@@ -239,9 +239,9 @@ export default function ShopClient() {
           />
         </div>
         <div className="mt-5 flex items-center gap-3 text-[13px]">
-          <span className="flex-1 rounded-xl border border-blush bg-white px-3 py-2 text-center tabular-nums">{formatPrice(filters.min)}</span>
+          <span className="flex-1 rounded-xl border border-blush bg-surface px-3 py-2 text-center tabular-nums">{formatPrice(filters.min)}</span>
           <span className="text-ink/40">to</span>
-          <span className="flex-1 rounded-xl border border-blush bg-white px-3 py-2 text-center tabular-nums">{formatPrice(filters.max)}</span>
+          <span className="flex-1 rounded-xl border border-blush bg-surface px-3 py-2 text-center tabular-nums">{formatPrice(filters.max)}</span>
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
           {[
@@ -323,7 +323,7 @@ export default function ShopClient() {
   return (
     <div>
       {/* Title band */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-blush-50 via-white to-blush">
+      <div className="relative overflow-hidden bg-gradient-to-br from-surface via-night to-surface">
         <div className="container-x py-14 text-center sm:py-16">
           <p className="eyebrow">The collection</p>
           <h1 className="mt-3 text-5xl font-semibold sm:text-6xl">{filters.category === "All" ? "Shop All" : filters.category}</h1>
@@ -338,7 +338,7 @@ export default function ShopClient() {
         <aside className="hidden lg:block">
           <div className="sticky top-32 max-h-[calc(100vh-9rem)] overflow-y-auto pr-3">
             <div className="mb-1 flex items-center justify-between">
-              <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-dark">Filters</h2>
+              <h2 className="font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">Filters</h2>
               {chips.length > 0 && (
                 <button onClick={clearAll} className="text-[11px] text-ink/60 underline underline-offset-4 hover:text-ink">
                   Clear all
@@ -383,7 +383,7 @@ export default function ShopClient() {
           {chips.length > 0 && (
             <div className="mb-6 flex flex-wrap items-center gap-2">
               {chips.map((c) => (
-                <button key={c.label} onClick={c.remove} className="flex items-center gap-2 rounded-full border border-brand/25 bg-white px-3 py-1.5 text-[12px] hover:border-brand">
+                <button key={c.label} onClick={c.remove} className="flex items-center gap-2 rounded-full border border-brand/25 bg-surface px-3 py-1.5 text-[12px] hover:border-brand">
                   {c.label}
                   <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M6 6l12 12M18 6L6 18" />

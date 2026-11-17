@@ -23,7 +23,7 @@ export default function CartPage() {
     <div className="container-x py-12">
       <h1 className="mb-10 text-5xl font-semibold">Shopping cart</h1>
       <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
-        <ul className="divide-y divide-blush rounded-3xl border border-blush bg-white">
+        <ul className="divide-y divide-blush rounded-3xl border border-blush bg-surface">
           {items.map((i) => (
             <li key={i.key} className="flex gap-5 p-5 sm:p-6">
               <Link href={`/product/${i.slug}`} className="group w-24 shrink-0 sm:w-32">

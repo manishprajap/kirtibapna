@@ -6,6 +6,8 @@ export interface Product {
   slug: string;
   name: string;
   category: Category;
+  /** Optional sub-group used by the admin search and filter (e.g. "Kaftans"). */
+  subcategory?: string;
   /** Extra categories the piece is also listed in (as on the original site). */
   alsoIn?: Category[];
   price: number;

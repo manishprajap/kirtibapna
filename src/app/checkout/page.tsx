@@ -45,7 +45,7 @@ export default function CheckoutPage() {
   if (orderId) {
     return (
       <div className="container-x py-28 text-center">
-        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-3xl text-emerald-700">✓</div>
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15 text-3xl text-emerald-400">✓</div>
         <h1 className="text-5xl font-semibold">Thank you for your order!</h1>
         <p className="mt-4 text-ink/65">
           Your order <strong className="text-brand">#{orderId}</strong> has been placed. A confirmation will be sent to you shortly.
@@ -70,7 +70,7 @@ export default function CheckoutPage() {
       <h1 className="mb-10 text-5xl font-semibold">Checkout</h1>
       <form onSubmit={submit} className="grid gap-10 lg:grid-cols-[1fr_380px]">
         <div className="space-y-8">
-          <section className="rounded-3xl border border-blush bg-white p-7">
+          <section className="rounded-3xl border border-blush bg-surface p-7">
             <h2 className="mb-6 text-2xl font-semibold">Contact &amp; delivery</h2>
             <div className="grid gap-5 sm:grid-cols-2">
               <div><label className="label" htmlFor="name">Full name</label><input id="name" name="name" required className="input" autoComplete="name" /></div>
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
             </div>
           </section>
 
-          <section className="rounded-3xl border border-blush bg-white p-7">
+          <section className="rounded-3xl border border-blush bg-surface p-7">
             <h2 className="mb-6 text-2xl font-semibold">Payment</h2>
             <div className="space-y-3">
               {payments.map((p) => (
@@ -105,7 +105,7 @@ export default function CheckoutPage() {
               </li>
             ))}
           </ul>
-          {error && <p className="mt-4 text-sm text-red-700" role="alert">{error}</p>}
+          {error && <p className="mt-4 text-sm text-red-400" role="alert">{error}</p>}
           <button disabled={loading} className="btn-primary mt-6 w-full">{loading ? "Placing order…" : `Place order · ${formatPrice(total)}`}</button>
         </OrderSummary>
       </form>
